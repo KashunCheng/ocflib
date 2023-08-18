@@ -16,7 +16,7 @@ pexpect = "^4.8.0"
 pycryptodome = "^3.18.0"
 PyGithub = "^1.59.1"
 pymysql = "<0.10.0"
-pysnmp = "^4.4.12"
+pysnmp = {git = "https://github.com/etingof/pysnmp", rev = "release-4.4.13"}
 PyYAML = "^6.0.1"
 redis = "^5.0.0"
 requests = "^2.31.0"

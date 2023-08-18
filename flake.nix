@@ -45,12 +45,14 @@
           overrides = (poetry2nix.defaultPoetryOverrides.extend
             (self: super: {
               pysnmp = super.pysnmp.overridePythonAttrs (old: {
+                version = "4.4.13";
                 src = pkgs.fetchFromGitHub {
                   owner = "etingof";
                   repo = "pysnmp";
-                  rev = "becd15c79c9a6b5696928ecd50bf5cca8b1770a1";
-                  sha256 = "sha256-puTLYzW1wlfYhRdgmNbqUTxJlZq4xs6kr7NfFtDqBVU=";
+                  rev = "release-4.4.13";
+                  sha256 = "sha256-N3yJdVur4T/vXpRTaHRWVQa1hPpZbMk/J+H38kjqAwE=";
                 };
+                patches = [ ];
               });
             })).extend (
             p2n-overrides
@@ -62,7 +64,7 @@
         };
       in
       {
-        package.default = poetry2nix.mkPoetryApplication (builtins.removeAttrs poetry-config [ "editablePackageSources" ]);
+        packages.default = poetry2nix.mkPoetryApplication (builtins.removeAttrs poetry-config [ "editablePackageSources" ]);
         devShells.default = (poetry2nix.mkPoetryEnv poetry-config).env;
         formatter = pkgs.nixpkgs-fmt;
       }
