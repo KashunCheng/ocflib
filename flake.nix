@@ -39,7 +39,7 @@
             )
             pypkgs-build-requirements
         );
-        env = poetry2nix.mkPoetryEnv {
+        poetry-config = {
           python = python37;
           projectDir = ./.;
           overrides = (poetry2nix.defaultPoetryOverrides.extend
@@ -62,12 +62,8 @@
         };
       in
       {
-        devShells.default =
-          (env.overrideAttrs (oldAttrs: {
-            buildInputs =  [
-              pkgs.cracklib
-            ];
-          })).env;
+        package.default = poetry2nix.mkPoetryApplication (builtins.removeAttrs poetry-config [ "editablePackageSources" ]);
+        devShells.default = (poetry2nix.mkPoetryEnv poetry-config).env;
         formatter = pkgs.nixpkgs-fmt;
       }
     );
