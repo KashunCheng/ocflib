@@ -65,6 +65,7 @@
       in
       {
         packages.default = poetry2nix.mkPoetryApplication (builtins.removeAttrs poetry-config [ "editablePackageSources" ]);
+        packages.python37 = python37;
         devShells.default = (poetry2nix.mkPoetryEnv poetry-config).env;
         formatter = pkgs.nixpkgs-fmt;
       }
